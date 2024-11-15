@@ -6,7 +6,7 @@ let gravity = 0;
 let score = 0;
 let createObstacleInterval;
 
-alert('Welcome to Mr Pac-Jump');
+alert('Welcome to Mr Pac-Jump')
 
 function jump() {
     if (isJumping) return;
@@ -60,6 +60,7 @@ function moveObstacle(obstacle) {
 function detectCollision(obstacle) {
     const characterRect = character.getBoundingClientRect();
     const obstacleRect = obstacle.getBoundingClientRect();
+
     return !(
         characterRect.top + characterRect.height < obstacleRect.top ||
         characterRect.top > obstacleRect.top + obstacleRect.height ||
@@ -67,6 +68,7 @@ function detectCollision(obstacle) {
         characterRect.left > obstacleRect.left + obstacleRect.width
     );
 }
+
 function endGame() {
     clearInterval(createObstacleInterval);
     const obstacles = document.querySelectorAll('.obstacle');
@@ -82,6 +84,7 @@ function endGame() {
 function closeGame() {
     // Clean up the game environment
     clearInterval(createObstacleInterval); // Stop any running intervals
+
     gameContainer.innerHTML = ""; // Remove all game elements
     scoreDisplay.innerText = ""; // Clear score display
     alert("Thank you for playing!"); // Show a final message
@@ -89,13 +92,16 @@ function closeGame() {
     window.close(); // Close the current window (works only for pop-ups)
 }
 
+
 function resetGame() {
     // Clear existing obstacles
     const obstacles = document.querySelectorAll('.obstacle');
     obstacles.forEach(obstacle => obstacle.remove());
+
     // Reset score and display
     score = -1;
     scoreDisplay.innerText = `Score: ${score}`;
+
 
     // Stop obstacle generation
     clearInterval(createObstacleInterval);
@@ -107,15 +113,20 @@ function resetGame() {
 
 
 
+
 }
+
 function startGame() {
     // Ensure a clean start
     clearInterval(createObstacleInterval);
     createObstacleInterval = setInterval(createObstacle, 2000);
 }
+
 document.addEventListener('keydown', (event) => {
     if (event.code === 'Space') {
         jump();
     }
 });
+
 startGame();
+
