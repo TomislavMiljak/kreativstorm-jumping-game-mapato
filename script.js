@@ -100,6 +100,8 @@ function resetGame() {
     // Stop obstacle generation
     clearInterval(createObstacleInterval);
 
+    createObstacle()
+
     // Reinitialize the game
     startGame();
 
