@@ -6,6 +6,8 @@ let gravity = 0;
 let score = 0;
 let createObstacleInterval;
 
+alert('Welcome to Mr Pac-Jump');
+
 function jump() {
     if (isJumping) return;
     isJumping = true;
