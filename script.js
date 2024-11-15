@@ -7,7 +7,7 @@ let score = 0;
 let createObstacleInterval;
 let jumpedOverObstacle = false; // Flag to track if the player has jumped over an obstacle
 
-alert("Thank you for playing!")
+alert("Welcome to Mr Pac-Jump xD");
 
 function jump() {
     if (isJumping) return;
