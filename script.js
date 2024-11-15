@@ -54,3 +54,35 @@ function moveObstacle(obstacle) {
         }
     }, 20);
 }
+
+function detectCollision(obstacle) {
+    const characterRect = character.getBoundingClientRect();
+    const obstacleRect = obstacle.getBoundingClientRect();
+    return !(
+        characterRect.top + characterRect.height < obstacleRect.top ||
+        characterRect.top > obstacleRect.top + obstacleRect.height ||
+        characterRect.left + characterRect.width < obstacleRect.left ||
+        characterRect.left > obstacleRect.left + obstacleRect.width
+    );
+}
+function endGame() {
+    clearInterval(createObstacleInterval);
+    const obstacles = document.querySelectorAll('.obstacle');
+    obstacles.forEach(obstacle => obstacle.remove());
+    const playAgain = confirm(`Game Over! Your final score is: ${score}\nDo you want to play again?`);
+    if (playAgain) {
+        resetGame();
+    } else {
+        closeGame();
+    }
+}
+
+function closeGame() {
+    // Clean up the game environment
+    clearInterval(createObstacleInterval); // Stop any running intervals
+    gameContainer.innerHTML = ""; // Remove all game elements
+    scoreDisplay.innerText = ""; // Clear score display
+    alert("Thank you for playing!"); // Show a final message
+    document.removeEventListener('keydown', jump);
+    window.close(); // Close the current window (works only for pop-ups)
+}
