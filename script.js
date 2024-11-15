@@ -5,9 +5,15 @@ let isJumping = false;
 let gravity = 0;
 let score = 0;
 let createObstacleInterval;
+
+let obstaclesPassed = 0;
+
+alert('Welcome to Mr Pac-Jump');
+
 let jumpedOverObstacle = false; // Flag to track if the player has jumped over an obstacle
 
 alert("Welcome to Mr Pac-Jump xD");
+
 
 function jump() {
     if (isJumping) return;
@@ -51,13 +57,29 @@ function moveObstacle(obstacle) {
         if (obstaclePosition < -20) {
             clearInterval(obstacleInterval);
             obstacle.remove();
+
             // Score is not incremented here, it's handled after jumping the obstacle
         } else if (detectCollision(obstacle)) {
             clearInterval(obstacleInterval);
             endGame();
+
         } else {
             obstaclePosition -= 5;
             obstacle.style.left = `${obstaclePosition}px`;
+
+            // Check if the obstacle has passed the character and update score
+            if (obstaclePosition < 50 && !obstacle.passed) {
+                obstacle.passed = true;
+                if (isAboveObstacle(obstacle)) {
+                    score++;
+                    scoreDisplay.innerText = `Score: ${score}`;
+                }
+            }
+        }
+
+        if (detectCollision(obstacle)) {
+            clearInterval(obstacleInterval);
+            endGame();
         }
 
         // Check if the player has successfully jumped over the obstacle
@@ -65,6 +87,14 @@ function moveObstacle(obstacle) {
             jumpedOverObstacle = true;  // Set flag when the player jumps over the obstacle
         }
     }, 20);
+}
+
+function isAboveObstacle(obstacle) {
+    const characterRect = character.getBoundingClientRect();
+    const obstacleRect = obstacle.getBoundingClientRect();
+
+    // Check if the character is above the obstacle (not colliding)
+    return characterRect.top + characterRect.height <= obstacleRect.top;
 }
 
 function detectCollision(obstacle) {
@@ -106,14 +136,22 @@ function resetGame() {
     obstacles.forEach(obstacle => obstacle.remove());
 
     // Reset score and display
+
+    score = 0; // Set the score back to 0
+    scoreDisplay.innerText = `Score: ${score}`;
+
+    // Stop obstacle generation
+
     score = 0;
     scoreDisplay.innerText = `Score: ${score}`;
 
     // Reset the flag and stop obstacle generation
     jumpedOverObstacle = false;
+
     clearInterval(createObstacleInterval);
 
     // Reinitialize the game
+    createObstacle();
     startGame();
 }
 
@@ -130,4 +168,3 @@ document.addEventListener('keydown', (event) => {
 });
 
 startGame();
-
