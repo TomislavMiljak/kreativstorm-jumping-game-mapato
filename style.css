@@ -31,34 +31,26 @@ body {
     display: flex;
     justify-content: space-between;
     width: 60%;
-    /* Adjust width to fit inside the character's head */
     position: absolute;
     top: 8px;
-    /* Position eyes slightly below the top */
 }
 
 .eye {
     width: 8px;
     height: 8px;
     background-color: #000;
-    /* Black color for eyes */
     border-radius: 50%;
 }
 
 .mouth {
     position: absolute;
     bottom: 8px;
-    /* Position the mouth towards the bottom of the character */
     width: 20px;
     height: 10px;
     background-color: #000;
-    /* Black color for the mouth */
     border-radius: 0 0 10px 10px;
-    /* Rounded corners to create the smile shape */
     transform: rotate(360deg);
-    /* Flip the smile to make it face upwards */
 }
-
 
 .obstacle {
     position: absolute;
@@ -69,8 +61,6 @@ body {
     animation: bounce 1s infinite ease-in-out;
 }
 
-
-
 .score {
     position: absolute;
     top: 10px;
@@ -78,3 +68,5 @@ body {
     font-size: 20px;
     color: #333;
 }
+
+
