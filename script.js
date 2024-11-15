@@ -5,8 +5,7 @@ let isJumping = false;
 let gravity = 0;
 let score = 0;
 let createObstacleInterval;
-
-alert('Welcome to Mr Pac-Jump')
+let jumpedOverObstacle = false; // Flag to track if the player has jumped over an obstacle
 
 function jump() {
     if (isJumping) return;
@@ -20,6 +19,11 @@ function jump() {
                 if (jumpHeight <= 0) {
                     clearInterval(downInterval);
                     isJumping = false;
+                    if (jumpedOverObstacle) {  // If the player jumped over an obstacle
+                        score++;  // Increment the score after jumping the obstacle
+                        scoreDisplay.innerText = `Score: ${score}`;
+                        jumpedOverObstacle = false;  // Reset the flag
+                    }
                 }
                 jumpHeight -= 4;
                 character.style.bottom = `${20 + jumpHeight}px`;
@@ -45,14 +49,18 @@ function moveObstacle(obstacle) {
         if (obstaclePosition < -20) {
             clearInterval(obstacleInterval);
             obstacle.remove();
-            score++;
-            scoreDisplay.innerText = `Score: ${score}`;
+            // Score is not incremented here, it's handled after jumping the obstacle
         } else if (detectCollision(obstacle)) {
             clearInterval(obstacleInterval);
             endGame();
         } else {
             obstaclePosition -= 5;
             obstacle.style.left = `${obstaclePosition}px`;
+        }
+
+        // Check if the player has successfully jumped over the obstacle
+        if (obstaclePosition < character.getBoundingClientRect().left && !jumpedOverObstacle) {
+            jumpedOverObstacle = true;  // Set flag when the player jumps over the obstacle
         }
     }, 20);
 }
@@ -82,9 +90,7 @@ function endGame() {
 }
 
 function closeGame() {
-    // Clean up the game environment
     clearInterval(createObstacleInterval); // Stop any running intervals
-
     gameContainer.innerHTML = ""; // Remove all game elements
     scoreDisplay.innerText = ""; // Clear score display
     alert("Thank you for playing!"); // Show a final message
@@ -92,34 +98,27 @@ function closeGame() {
     window.close(); // Close the current window (works only for pop-ups)
 }
 
-
 function resetGame() {
     // Clear existing obstacles
     const obstacles = document.querySelectorAll('.obstacle');
     obstacles.forEach(obstacle => obstacle.remove());
 
     // Reset score and display
-    score = -1;
+    score = 0;
     scoreDisplay.innerText = `Score: ${score}`;
 
-
-    // Stop obstacle generation
+    // Reset the flag and stop obstacle generation
+    jumpedOverObstacle = false;
     clearInterval(createObstacleInterval);
-
-    createObstacle()
 
     // Reinitialize the game
     startGame();
-
-
-
-
 }
 
 function startGame() {
     // Ensure a clean start
     clearInterval(createObstacleInterval);
-    createObstacleInterval = setInterval(createObstacle, 2000);
+    createObstacleInterval = setInterval(createObstacle, 2000); // Generate obstacles every 2 seconds
 }
 
 document.addEventListener('keydown', (event) => {
