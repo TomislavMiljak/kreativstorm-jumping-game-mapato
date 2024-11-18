@@ -115,7 +115,8 @@ function endGame() {
     if (playAgain) {
         resetGame();
     } else if (!playAgain || null){
-        closeGame();
+        alert("Do you want to close the game?");
+        window.close();
     }
 }
 
