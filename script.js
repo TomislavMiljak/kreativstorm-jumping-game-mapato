@@ -1,4 +1,4 @@
-s
+
 
 const character = document.getElementById('character');
 const gameContainer = document.querySelector('.game-container');
