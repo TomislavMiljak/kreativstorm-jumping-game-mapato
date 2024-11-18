@@ -1,14 +1,16 @@
+
+
 const character = document.getElementById('character');
 const gameContainer = document.querySelector('.game-container');
 const scoreDisplay = document.getElementById('score');
 let isJumping = false;
-let gravity = 0;
 let score = 0;
 let createObstacleInterval;
-let obstaclesPassed = 0;
 
+// Start the game with an alert
 alert('Welcome to Mr Pac-Jump');
 
+// Function to handle jumping
 function jump() {
     if (isJumping) return;
     isJumping = true;
@@ -31,6 +33,7 @@ function jump() {
     }, 10);
 }
 
+// Function to create an obstacle
 function createObstacle() {
     const obstacle = document.createElement('div');
     obstacle.classList.add('obstacle');
@@ -47,6 +50,7 @@ function createObstacle() {
     moveObstacle(obstacle);
 }
 
+// Function to move the obstacle
 function moveObstacle(obstacle) {
     let obstaclePosition = gameContainer.clientWidth;
 
@@ -77,7 +81,13 @@ function moveObstacle(obstacle) {
     }, 15);
 }
 
+// Function to generate a random interval
+function randomizeObstacleInterval() {
+    // Generate a random number between 1000 (1 second) and 4000 (3 seconds)
+    return Math.floor(Math.random() * (4000 - 1000 + 1)) + 1000;
+}
 
+// Function to check if the character is above the obstacle
 function isAboveObstacle(obstacle) {
     const characterRect = character.getBoundingClientRect();
     const obstacleRect = obstacle.getBoundingClientRect();
@@ -86,6 +96,7 @@ function isAboveObstacle(obstacle) {
     return characterRect.top + characterRect.height <= obstacleRect.top;
 }
 
+// Function to detect collision between character and obstacle
 function detectCollision(obstacle) {
     const characterRect = character.getBoundingClientRect();
     const obstacleRect = obstacle.getBoundingClientRect();
@@ -98,6 +109,7 @@ function detectCollision(obstacle) {
     );
 }
 
+// Function to handle game over
 function endGame() {
     clearInterval(createObstacleInterval);
     const obstacles = document.querySelectorAll('.obstacle');
@@ -110,16 +122,16 @@ function endGame() {
     }
 }
 
+// Function to close the game
 function closeGame() {
-    // Clean up the game environment
     clearInterval(createObstacleInterval); // Stop any running intervals
     gameContainer.innerHTML = ""; // Remove all game elements
     scoreDisplay.innerText = ""; // Clear score display
     alert("Thank you for playing!"); // Show a final message
     document.removeEventListener('keydown', jump);
-    window.close(); // Close the current window (works only for pop-ups)
 }
 
+// Function to reset the game
 function resetGame() {
     // Clear existing obstacles
     const obstacles = document.querySelectorAll('.obstacle');
@@ -133,20 +145,30 @@ function resetGame() {
     clearInterval(createObstacleInterval);
 
     // Reinitialize the game
-    createObstacle();
     startGame();
 }
 
+// Function to start the game
 function startGame() {
     // Ensure a clean start
     clearInterval(createObstacleInterval);
-    createObstacleInterval = setInterval(createObstacle, 2000);
+    createObstacle(); // Create the first obstacle immediately
+
+    const createNewObstacle = () => {
+        createObstacle(); // Create a new obstacle
+        // Schedule the next obstacle creation with a new random interval
+        createObstacleInterval = setTimeout(createNewObstacle, randomizeObstacleInterval());
+    };
+
+    createNewObstacle(); // Start the first obstacle creation
 }
 
+// Event listener for jumping
 document.addEventListener('keydown', (event) => {
     if (event.code === 'Space') {
         jump();
     }
 });
 
+// Start the game
 startGame();

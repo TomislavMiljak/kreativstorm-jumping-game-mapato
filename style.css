@@ -67,7 +67,8 @@ body {
     position: absolute;
     bottom: 20px;
     width: 20px;
-    height: calc(10px + 10px * Math.random());
+    /* height: calc(10px + 10px * Math.random()); */
+    height: calc(10px + 10px);
     background-color: #8b4513;
     border-top: 8px solid hsl(120, 60%, 40%);
     border-radius: 5px;
