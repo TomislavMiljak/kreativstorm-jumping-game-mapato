@@ -1,6 +1,6 @@
 ## Jumping Game
 
-Preview Link: https://tomislavmiljak.github.io/kreativstorm-jumping-game-mapato/ <br>
+Preview Link: https://tomislavmiljak.github.io/kreativstorm-jumping-game-mapato/<br>
 
 A simple browser-based game where the player controls a character to avoid obstacles by jumping. <br> The objective is to score as many points as possible by dodging the moving obstacles.
 
