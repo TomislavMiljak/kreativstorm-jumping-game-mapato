@@ -138,11 +138,55 @@ function resetGame() {
 }
 
 
-// const randomizeObstacleInterval = Math.floor(Math.random() * 2000) + 500
+/* function randomizeObstacleInterval() {
+    // Generate a random number between 2000 (2 seconds) and 5000 (5 seconds)
+    return Math.floor(Math.random() * (5000 - 2000 + 1)) + 2000;
+}
+
+let createObstacleInterval;
+
+function createObstacle() {
+    // Your logic to create an obstacle goes here
+
+    // Clear the previous interval
+    clearInterval(createObstacleInterval);
+    // Set a new interval with a new random duration for the next obstacle
+    createObstacleInterval = setInterval(() => {
+        createObstacle(); // Create next obstacle after a randomized interval
+    }, randomizeObstacleInterval());
+}
+
 function startGame() {
     // Ensure a clean start
     clearInterval(createObstacleInterval);
-    createObstacleInterval = setInterval(createObstacle, 2000);
+    createObstacle(); // Create the first obstacle immediately
+
+    // Start the interval for the first new obstacle
+    createObstacleInterval = setInterval(() => {
+        createObstacle(); // Create next obstacle after a randomized interval
+    }, randomizeObstacleInterval());
+} */
+// Math.floor(Math.random() * (max - min + 1)) + min
+//const randomizeObstacleInterval = Math.floor(Math.random() * (3000 - 100 + 1) + 100)
+/* function randomizeObstacleInterval(){
+    return Math.floor(Math.random() * (5000 - 2000 + 1) + 2000) 
+}; */
+
+/* let createRandomObstacleInterval;
+function createRandomizedObstacleInterval(){
+    clearInterval(createRandomObstacleInterval)
+    createRandomObstacleInterval = setInterval(() => {
+        createObstacle();
+    }, randomizeObstacleInterval())
+} */
+function startGame() {
+    // Ensure a clean start
+    clearInterval(createObstacleInterval);
+    createObstacle();
+    createObstacleInterval = setInterval(createObstacle, Math.floor(Math.random() * (5000 - 2000 + 1) + 2000) );
+    /* createObstacleInterval = setInterval(() => {
+        createObstacle(); // Create next obstacle after a randomized interval
+    }, randomizeObstacleInterval()); */
 }
 
 document.addEventListener('keydown', (event) => {
