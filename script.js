@@ -119,7 +119,7 @@ function endGame() {
         resetGame();
     } else if (!playAgain || null){
         closeGame();
-    }
+    } else closeGame();
 }
 
 // Function to close the game
