@@ -105,7 +105,7 @@ function endGame() {
     const playAgain = confirm(`Game Over! Your final score is: ${score}\nDo you want to play again?`);
     if (playAgain) {
         resetGame();
-    } else {
+    } else if (!playAgain || null){
         closeGame();
     }
 }
