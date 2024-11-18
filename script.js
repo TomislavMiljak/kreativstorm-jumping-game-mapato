@@ -115,8 +115,11 @@ function endGame() {
     if (playAgain) {
         resetGame();
     } else if (!playAgain || null){
-        alert("Do you want to close the game?");
-        window.close();
+        alert("Thank you for playing! Do you want to close this session of the game?");
+        score = 0;
+        endGame;
+        return window.close();
+        
     }
 }
 
@@ -127,6 +130,7 @@ function closeGame() {
     scoreDisplay.innerText = ""; 
     alert("Thank you for playing!"); 
     document.removeEventListener('keydown', jump);
+    return window.close();
 }
 
 
