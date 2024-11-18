@@ -137,6 +137,8 @@ function resetGame() {
     startGame();
 }
 
+
+// const randomizeObstacleInterval = Math.floor(Math.random() * 2000) + 500
 function startGame() {
     // Ensure a clean start
     clearInterval(createObstacleInterval);
