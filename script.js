@@ -6,7 +6,7 @@ let score = 0;
 let createObstacleInterval;
 
 
-alert('Welcome to Mr Pac-Jump');
+alert('Welcome to the new session of Mr Pac-Jump');
 
 
 function jump() {
