@@ -107,6 +107,7 @@ function closeGame() {
     alert("Thank you for playing!"); // Show a final message
     document.removeEventListener('keydown', jump);
     window.close(); // Close the current window (works only for pop-ups)
+    
 }
 
 function resetGame() {
