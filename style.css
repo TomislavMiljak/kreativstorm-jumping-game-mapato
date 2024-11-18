@@ -4,13 +4,24 @@ body {
     background-color: #f7f7f7;
 }
 
+@keyframes moveClouds {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 100vw 0;
+    }
+}
+
 .game-container {
     position: relative;
     width: 100vw;
     height: 200px;
     border: 1px solid #000;
     overflow: hidden;
-    background-color: #fff;
+    background: url('https://media.istockphoto.com/id/1476169765/pt/foto/art-collage-success-support-businesswoman-bounce-on-trampoline-jump-flying-high-to-grab-star.webp?s=2048x2048&w=is&k=20&c=-TzgKX7jqyQxgjrY3-7DeD35CN9FWj7GzSva0F3bDIE=') repeat-x;
+    animation: moveClouds 30s linear infinite;
 }
 
 .character {
@@ -49,17 +60,27 @@ body {
     height: 10px;
     background-color: #000;
     border-radius: 0 0 10px 10px;
-    transform: rotate(360deg);
+    transform: rotate(180deg);
 }
 
 .obstacle {
     position: absolute;
     bottom: 20px;
     width: 20px;
-    height: 40px;
-    background-color: #dc3545;
-    animation: bounce 1s infinite ease-in-out;
+    /* Diminuir a largura */
+    height: calc(10px + 10px * Math.random());
+    /* Diminuir a altura variável */
+    background-color: #8b4513;
+    /* Cor da pedra */
+    border-top: 8px solid hsl(120, 60%, 40%);
+    /* Verde para a grama */
+    border-radius: 5px;
+    /* Bordas arredondadas */
+    animation: moveObstacle 2s linear infinite;
 }
+
+
+
 
 .score {
     position: absolute;
@@ -68,5 +89,3 @@ body {
     font-size: 20px;
     color: #333;
 }
-
-
