@@ -28,14 +28,22 @@ function jump() {
         }
         jumpHeight += 4;
         character.style.bottom = `${20 + jumpHeight}px`;
-    }, 20);
+    }, 10);
 }
 
 function createObstacle() {
     const obstacle = document.createElement('div');
     obstacle.classList.add('obstacle');
-    obstacle.style.left = '100%';
+
+    // Randomize width and height
+    const randomWidth = Math.floor(Math.random() * 30) + 20; // Width between 20px and 50px
+    const randomHeight = Math.floor(Math.random() * 40) + 10; // Height between 20px and 70px
+    obstacle.style.width = `${randomWidth}px`;
+    obstacle.style.height = `${randomHeight}px`;
+
+    obstacle.style.left = '100%'; // Start at the right edge
     gameContainer.appendChild(obstacle);
+
     moveObstacle(obstacle);
 }
 
@@ -47,12 +55,13 @@ function moveObstacle(obstacle) {
             clearInterval(obstacleInterval);
             obstacle.remove();
         } else {
-            obstaclePosition -= 5;
+            obstaclePosition -= 5; // Move left
             obstacle.style.left = `${obstaclePosition}px`;
 
             // Check if the obstacle has passed the character and update score
             if (obstaclePosition < 50 && !obstacle.passed) {
                 obstacle.passed = true;
+                // Increment score if the character is above the obstacle
                 if (isAboveObstacle(obstacle)) {
                     score++;
                     scoreDisplay.innerText = `Score: ${score}`;
@@ -60,12 +69,14 @@ function moveObstacle(obstacle) {
             }
         }
 
+        // Detect collision
         if (detectCollision(obstacle)) {
             clearInterval(obstacleInterval);
             endGame();
         }
-    }, 20);
+    }, 15);
 }
+
 
 function isAboveObstacle(obstacle) {
     const characterRect = character.getBoundingClientRect();
@@ -94,7 +105,7 @@ function endGame() {
     const playAgain = confirm(`Game Over! Your final score is: ${score}\nDo you want to play again?`);
     if (playAgain) {
         resetGame();
-    } else if (!playAgain || null){
+    } else {
         closeGame();
     }
 }
@@ -107,7 +118,6 @@ function closeGame() {
     alert("Thank you for playing!"); // Show a final message
     document.removeEventListener('keydown', jump);
     window.close(); // Close the current window (works only for pop-ups)
-    
 }
 
 function resetGame() {
