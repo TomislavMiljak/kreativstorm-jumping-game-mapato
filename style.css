@@ -67,15 +67,10 @@ body {
     position: absolute;
     bottom: 20px;
     width: 20px;
-    /* Diminuir a largura */
     height: calc(10px + 10px * Math.random());
-    /* Diminuir a altura variável */
     background-color: #8b4513;
-    /* Cor da pedra */
     border-top: 8px solid hsl(120, 60%, 40%);
-    /* Verde para a grama */
     border-radius: 5px;
-    /* Bordas arredondadas */
     animation: moveObstacle 2s linear infinite;
 }
 
