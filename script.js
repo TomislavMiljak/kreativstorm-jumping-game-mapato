@@ -6,7 +6,7 @@ let score = 0;
 let createObstacleInterval;
 
 
-alert('Welcome to the new session of Mr Pac-Jump');
+alert('Welcome to the new session of Mr Pac-Jump game!');
 
 
 function jump() {
@@ -115,7 +115,7 @@ function endGame() {
     if (playAgain) {
         resetGame();
     } else if (!playAgain || null){
-        alert("Thank you for playing! Do you want to close this session of the game?");
+        alert("Thank you for playing! Do you want to close this game?");
         score = 0;
         endGame;
         return window.close();
